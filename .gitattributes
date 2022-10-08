@@ -1,0 +1,6 @@
+# Consider all files as binary and git will not do any line ending manipulation
+#
+# All text files should be checked in with LF line endings, with the exception
+# of those which require CRLF (i.e windows .bat files).
+
+* -text
