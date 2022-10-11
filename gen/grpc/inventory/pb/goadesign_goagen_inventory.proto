@@ -1,0 +1,16 @@
+// Code generated with goa v3.9.1, DO NOT EDIT.
+//
+// inventory protocol buffer definition
+//
+// Command:
+// $ goa gen github.com/austinhuck/characters-go/design
+
+syntax = "proto3";
+
+package inventory;
+
+option go_package = "/inventorypb";
+
+// Inventory service.
+service Inventory {
+}

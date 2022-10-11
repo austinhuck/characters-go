@@ -1,0 +1,862 @@
+openapi: 3.0.3
+info:
+    title: Character API
+    description: HTTP service for managing characters.
+    version: "1.0"
+servers:
+    - url: http://localhost:8000
+paths:
+    /character/{id}/inventory:
+        delete:
+            tags:
+                - inventory
+            summary: clearInventory inventory
+            operationId: inventory#clearInventory
+            parameters:
+                - name: id
+                  in: path
+                  description: Character identifier
+                  required: true
+                  schema:
+                    type: integer
+                    description: Character identifier
+                    example: 4927756328253366076
+                    format: int64
+                  example: 5492320347325125611
+            responses:
+                "204":
+                    description: No Content response.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        get:
+            tags:
+                - inventory
+            summary: getInventory inventory
+            operationId: inventory#getInventory
+            parameters:
+                - name: id
+                  in: path
+                  description: Character identifier
+                  required: true
+                  schema:
+                    type: integer
+                    description: Character identifier
+                    example: 4210974797856405323
+                    format: int64
+                  example: 7047137694016359068
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/InventoryEntry'
+                                example:
+                                    - item: 607686988735380638
+                                      quantity: 281540189431614387
+                                    - item: 607686988735380638
+                                      quantity: 281540189431614387
+                                    - item: 607686988735380638
+                                      quantity: 281540189431614387
+                            example:
+                                - item: 607686988735380638
+                                  quantity: 281540189431614387
+                                - item: 607686988735380638
+                                  quantity: 281540189431614387
+                                - item: 607686988735380638
+                                  quantity: 281540189431614387
+                                - item: 607686988735380638
+                                  quantity: 281540189431614387
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        patch:
+            tags:
+                - inventory
+            summary: updateInventory inventory
+            operationId: inventory#updateInventory
+            parameters:
+                - name: id
+                  in: path
+                  description: Character ID
+                  required: true
+                  schema:
+                    type: integer
+                    description: Character ID
+                    example: 7320419358324245498
+                    format: int64
+                  example: 1720317271978127430
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/InventoryEntry'
+                        example:
+                            item: 1766420538716923054
+                            quantity: 10997400203762602967
+            responses:
+                "204":
+                    description: No Content response.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /characters:
+        get:
+            tags:
+                - character
+            summary: getCharacters character
+            operationId: character#getCharacters
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Character'
+                                example:
+                                    - description: Et vitae.
+                                      experience: 4289663611342163001
+                                      health: 17049182561751967062
+                                      id: 8449873478960604142
+                                      name: Nesciunt provident.
+                                    - description: Et vitae.
+                                      experience: 4289663611342163001
+                                      health: 17049182561751967062
+                                      id: 8449873478960604142
+                                      name: Nesciunt provident.
+                            example:
+                                - description: Et vitae.
+                                  experience: 4289663611342163001
+                                  health: 17049182561751967062
+                                  id: 8449873478960604142
+                                  name: Nesciunt provident.
+                                - description: Et vitae.
+                                  experience: 4289663611342163001
+                                  health: 17049182561751967062
+                                  id: 8449873478960604142
+                                  name: Nesciunt provident.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        post:
+            tags:
+                - character
+            summary: createCharacter character
+            operationId: character#createCharacter
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateCharacterRequestBody'
+                        example:
+                            description: Maxime non error dignissimos.
+                            experience: 11895619109444395021
+                            health: 13825686865421341647
+                            name: Voluptates accusamus voluptas.
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Character'
+                            example:
+                                description: Quaerat illo et quod beatae.
+                                experience: 5249340970251635237
+                                health: 15952677228895994969
+                                id: 639528244941781023
+                                name: Dolorem labore hic nostrum.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /characters/{id}:
+        delete:
+            tags:
+                - character
+            summary: deleteCharacter character
+            operationId: character#deleteCharacter
+            parameters:
+                - name: id
+                  in: path
+                  description: Character identifier
+                  required: true
+                  schema:
+                    type: integer
+                    description: Character identifier
+                    example: 8413504001960531981
+                    format: int64
+                  example: 1440513778147351927
+            responses:
+                "204":
+                    description: No Content response.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        get:
+            tags:
+                - character
+            summary: getCharacter character
+            operationId: character#getCharacter
+            parameters:
+                - name: id
+                  in: path
+                  description: Character identifier
+                  required: true
+                  schema:
+                    type: integer
+                    description: Character identifier
+                    example: 4904173420236248336
+                    format: int64
+                  example: 7112781756148098517
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Character'
+                            example:
+                                description: Molestiae atque.
+                                experience: 9040835123625314306
+                                health: 9693809395560085825
+                                id: 2711097094028964330
+                                name: Adipisci cupiditate.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        put:
+            tags:
+                - character
+            summary: updateCharacter character
+            operationId: character#updateCharacter
+            parameters:
+                - name: id
+                  in: path
+                  description: Character identifier
+                  required: true
+                  schema:
+                    type: integer
+                    description: Character identifier
+                    example: 6734070478663165395
+                    format: int64
+                  example: 3153021913077155317
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateCharacterRequestBody'
+                        example:
+                            description: Qui ut.
+                            experience: 6143131330256813255
+                            health: 16114915148797695919
+                            name: Reiciendis eius a totam.
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Character'
+                            example:
+                                description: Fugit illo id dolores sunt.
+                                experience: 9666912113071032670
+                                health: 2639781492631465992
+                                id: 8941822597438580501
+                                name: Dicta distinctio eum eveniet ut nisi sint.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /items:
+        get:
+            tags:
+                - item
+            summary: getItems item
+            operationId: item#getItems
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Item'
+                                example:
+                                    - damage: 2713700503461559942
+                                      description: Qui inventore ratione nisi quia inventore.
+                                      healing: 14170935423270179368
+                                      id: 9015896799095499012
+                                      name: Nihil enim veniam sed aut.
+                                      protection: 4374314649707233559
+                                    - damage: 2713700503461559942
+                                      description: Qui inventore ratione nisi quia inventore.
+                                      healing: 14170935423270179368
+                                      id: 9015896799095499012
+                                      name: Nihil enim veniam sed aut.
+                                      protection: 4374314649707233559
+                            example:
+                                - damage: 2713700503461559942
+                                  description: Qui inventore ratione nisi quia inventore.
+                                  healing: 14170935423270179368
+                                  id: 9015896799095499012
+                                  name: Nihil enim veniam sed aut.
+                                  protection: 4374314649707233559
+                                - damage: 2713700503461559942
+                                  description: Qui inventore ratione nisi quia inventore.
+                                  healing: 14170935423270179368
+                                  id: 9015896799095499012
+                                  name: Nihil enim veniam sed aut.
+                                  protection: 4374314649707233559
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        post:
+            tags:
+                - item
+            summary: createItem item
+            operationId: item#createItem
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateItemRequestBody'
+                        example:
+                            damage: 605133029443553342
+                            description: Quae ea velit iste deserunt occaecati.
+                            healing: 9434446331462297666
+                            name: Iste laborum ut ullam perferendis.
+                            protection: 6811333696036567306
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Item'
+                            example:
+                                damage: 5496367576837996952
+                                description: Enim illo deleniti.
+                                healing: 7087406071862529476
+                                id: 6688881598409850703
+                                name: Voluptas a quos adipisci vel dignissimos voluptatem.
+                                protection: 1322792726489354528
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /items/{id}:
+        delete:
+            tags:
+                - item
+            summary: deleteItem item
+            operationId: item#deleteItem
+            parameters:
+                - name: id
+                  in: path
+                  description: Item ID
+                  required: true
+                  schema:
+                    type: integer
+                    description: Item ID
+                    example: 4168904892790333709
+                    format: int64
+                  example: 2444316580221122054
+            responses:
+                "204":
+                    description: No Content response.
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        get:
+            tags:
+                - item
+            summary: getItem item
+            operationId: item#getItem
+            parameters:
+                - name: id
+                  in: path
+                  description: Item ID
+                  required: true
+                  schema:
+                    type: integer
+                    description: Item ID
+                    example: 353658206819062739
+                    format: int64
+                  example: 3693761966887545151
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Item'
+                            example:
+                                damage: 8477931118307654637
+                                description: Nam explicabo voluptatem.
+                                healing: 6698736790817635169
+                                id: 8162021504207796739
+                                name: Voluptates voluptates dolores.
+                                protection: 4447067653017969895
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+        put:
+            tags:
+                - item
+            summary: updateItem item
+            operationId: item#updateItem
+            parameters:
+                - name: id
+                  in: path
+                  description: Item ID
+                  required: true
+                  schema:
+                    type: integer
+                    description: Item ID
+                    example: 3680438210588590937
+                    format: int64
+                  example: 8724514447974413555
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateItemRequestBody'
+                        example:
+                            damage: 8836063704909434334
+                            description: Illo ipsam voluptate magni minima.
+                            healing: 7974778561697912772
+                            name: Sit id modi ut dolor ipsum.
+                            protection: 267106854576953551
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Item'
+                            example:
+                                damage: 3011837646528370156
+                                description: Non est.
+                                healing: 9669926336824245505
+                                id: 3811052275780088366
+                                name: Cupiditate accusantium assumenda.
+                                protection: 4252333664129703408
+                "400":
+                    description: 'BadData: Bad Request response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "404":
+                    description: 'IdNotFound: Not Found response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                "507":
+                    description: 'IDsExhausted: Insufficient Storage response.'
+                    content:
+                        application/vnd.goa.error:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+components:
+    schemas:
+        Character:
+            type: object
+            properties:
+                description:
+                    type: string
+                    description: Character description
+                    example: Est expedita veniam suscipit.
+                experience:
+                    type: integer
+                    description: Character experience
+                    example: 1487686187352211412
+                health:
+                    type: integer
+                    description: Character health
+                    example: 15944302608060206606
+                id:
+                    type: integer
+                    description: Character identifier
+                    example: 507109682128660199
+                    format: int64
+                name:
+                    type: string
+                    description: Character name
+                    example: Incidunt voluptates expedita dicta provident.
+            description: Character and attributes
+            example:
+                description: Quam quam deleniti.
+                experience: 2229222083418527692
+                health: 10693530398283048013
+                id: 5650219488214294959
+                name: Qui iusto reiciendis.
+            required:
+                - id
+                - name
+                - description
+                - health
+                - experience
+        CreateCharacterRequestBody:
+            type: object
+            properties:
+                description:
+                    type: string
+                    description: Character description
+                    example: Dicta iure eum ut maxime.
+                experience:
+                    type: integer
+                    description: Character experience
+                    example: 2459363281064030926
+                health:
+                    type: integer
+                    description: Character health
+                    example: 6456317851491563998
+                name:
+                    type: string
+                    description: Character name
+                    example: Quidem accusantium quia id et.
+            example:
+                description: Nihil provident odit quam ad.
+                experience: 8663411301861420535
+                health: 12293508591779840085
+                name: Nihil qui accusantium provident aut.
+            required:
+                - name
+                - description
+                - health
+                - experience
+        CreateItemRequestBody:
+            type: object
+            properties:
+                damage:
+                    type: integer
+                    description: Item damage
+                    example: 11441591766242007798
+                description:
+                    type: string
+                    description: Item description
+                    example: Alias commodi sint necessitatibus eum.
+                healing:
+                    type: integer
+                    description: Item healing
+                    example: 8802690590475198015
+                name:
+                    type: string
+                    description: Item name
+                    example: Debitis quo id nostrum eveniet.
+                protection:
+                    type: integer
+                    description: Item protection
+                    example: 6273811187125781592
+                    format: int64
+            example:
+                damage: 6228987281093259214
+                description: Voluptas officiis quo vitae.
+                healing: 10692557221777591341
+                name: Ut ut nihil ut.
+                protection: 6763516921511715957
+            required:
+                - name
+                - description
+                - damage
+                - healing
+                - protection
+        Error:
+            type: object
+            properties:
+                fault:
+                    type: boolean
+                    description: Is the error a server-side fault?
+                    example: true
+                id:
+                    type: string
+                    description: ID is a unique identifier for this particular occurrence of the problem.
+                    example: 123abc
+                message:
+                    type: string
+                    description: Message is a human-readable explanation specific to this occurrence of the problem.
+                    example: parameter 'p' must be an integer
+                name:
+                    type: string
+                    description: Name is the name of this class of errors.
+                    example: bad_request
+                temporary:
+                    type: boolean
+                    description: Is the error temporary?
+                    example: true
+                timeout:
+                    type: boolean
+                    description: Is the error a timeout?
+                    example: true
+            example:
+                id: 3F1FKVRR
+                message: Value of ID must be an integer
+                name: bad_request
+            required:
+                - name
+                - id
+                - message
+                - temporary
+                - timeout
+                - fault
+        InventoryEntry:
+            type: object
+            properties:
+                item:
+                    type: integer
+                    description: Item ID
+                    example: 5977604505152641336
+                    format: int64
+                quantity:
+                    type: integer
+                    description: Quantity of the item
+                    example: 5379244831624595060
+            description: Character inventory entry
+            example:
+                item: 3630179884423154610
+                quantity: 5393031360353868072
+            required:
+                - item
+                - quantity
+        Item:
+            type: object
+            properties:
+                damage:
+                    type: integer
+                    description: Item damage
+                    example: 11755247533084740864
+                description:
+                    type: string
+                    description: Item description
+                    example: Mollitia laudantium est rerum repudiandae vel vero.
+                healing:
+                    type: integer
+                    description: Item healing
+                    example: 473723587767835187
+                id:
+                    type: integer
+                    description: Item ID
+                    example: 3487736202337588240
+                    format: int64
+                name:
+                    type: string
+                    description: Item name
+                    example: Deleniti magnam voluptatem quo.
+                protection:
+                    type: integer
+                    description: Item protection
+                    example: 8804315533472104078
+                    format: int64
+            description: Item and attributes
+            example:
+                damage: 4746827050052741737
+                description: Ab aut at.
+                healing: 16251848196333190271
+                id: 5871109262150374501
+                name: Tenetur maxime dolores voluptate.
+                protection: 8976214078432001659
+            required:
+                - id
+                - name
+                - description
+                - damage
+                - healing
+                - protection
+tags:
+    - name: character
+      description: Character service.
+    - name: item
+      description: Item service.
+    - name: inventory
+      description: Inventory service.
