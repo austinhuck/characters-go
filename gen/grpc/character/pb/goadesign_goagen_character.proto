@@ -1,0 +1,16 @@
+// Code generated with goa v3.9.1, DO NOT EDIT.
+//
+// character protocol buffer definition
+//
+// Command:
+// $ goa gen github.com/austinhuck/characters-go/design
+
+syntax = "proto3";
+
+package character;
+
+option go_package = "/characterpb";
+
+// Character service.
+service Character {
+}
